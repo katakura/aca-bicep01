@@ -1,4 +1,4 @@
-PREFIX_NAME				= omi01
+PREFIX_NAME				= ktkr01
 RESOURCE_GROUP				= $(PREFIX_NAME)-rg
 LOCATION				= canadacentral
 #NAME					= container-apps-$(PREFIX_NAME)
@@ -10,8 +10,8 @@ CONTAINERAPPS_ID			?= $(shell az resource list -g $(RESOURCE_GROUP) --resource-t
 #MIN_REPLICAS				= 1
 #TRANSPORT				= http2
 #ALLOWINSECURE				= false
-#SERVER_PORT				= 443
-#CONTAINER_PORT				= 8088
+SERVER_PORT				= 443
+CONTAINER_PORT				= 3000
 #CONTAINER_ONLY				= false
 
 help:			## Show this help.
@@ -41,8 +41,8 @@ deploy-apps-demo:	## deploy demo app
 	-p \
 	containerAppName=$(CONTAINERAPPS_NAME) \
 	environmentName=$(ENVIRONMENT_NAME) \
-	containerImage=mcr.microsoft.com/azuredocs/containerapps-helloworld:latest \
-	containerPort=80
+	containerImage=docker.io/katakura/wetty-local-login:latest \
+	containerPort=$(CONTAINER_PORT)
 
 clean:
 	az group delete \
